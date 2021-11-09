@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  check:
+    name: Check
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v2
+
+    - name: Run detekt
+      run: ./gradlew detektDebug
